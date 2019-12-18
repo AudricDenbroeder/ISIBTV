@@ -10,6 +10,8 @@ Button btnLD(6);
 
 int currentAstate;
 int lastAstate;
+int counterR = 0;
+int counterL = 0;
 
 void setup() {
   pinMode(outA, INPUT_PULLUP);
@@ -43,10 +45,21 @@ void loop() {
 
   if(currentAstate != lastAstate){
     if(digitalRead(outB) != currentAstate){
-      Serial.write(0xFF);
+      counterR++;
+      if(counterR == 10)
+      {
+        Serial.write(0xFF);
+        counterR = 0;
+        counterL = 0;
+      }
     }
     else{
-      Serial.write(0x99);
+      counterL++;
+      if(counterL == 10){
+        Serial.write(0x99);
+        counterL = 0;
+        counterR = 0;
+      }
     }
   }
 
