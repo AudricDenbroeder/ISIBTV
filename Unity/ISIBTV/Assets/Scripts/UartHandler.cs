@@ -6,7 +6,7 @@ using System.IO.Ports;
 
 public class UartHandler : MonoBehaviour
 {
-    public string portName = "COM4";
+    public string portName = "COM6";
     public int baudRate = 115200;
     private string whButton;
 

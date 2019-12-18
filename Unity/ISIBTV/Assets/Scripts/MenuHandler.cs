@@ -86,12 +86,25 @@ public class MenuHandler : MonoBehaviour
                     NextSncb();
 
                 else if(dataUart == "153"){
+                    oldBackCoroutine = currentBackCoroutine;
+                    currentBackCoroutine = backToMain();
+
+                    StopCoroutine(oldBackCoroutine);
+
+                    stibMenu.GetComponent<StibMenuScript>().wheelTurnLeft();
+                    yield return new WaitForSeconds(0.25f);
+
+                    StartCoroutine(currentBackCoroutine);
+                }else if(dataUart == "255"){
+                    oldBackCoroutine = currentBackCoroutine;
+                    currentBackCoroutine = backToMain();
+
+                    StopCoroutine(oldBackCoroutine);
+
                     stibMenu.GetComponent<StibMenuScript>().wheelTurnRight();
                     yield return new WaitForSeconds(0.25f);
 
-                }else if(dataUart == "255"){
-                    stibMenu.GetComponent<StibMenuScript>().wheelTurnLeft();
-                    yield return new WaitForSeconds(0.25f);
+                    StartCoroutine(currentBackCoroutine);
                 }
 
             }else if(sncbMenu.activeSelf){
